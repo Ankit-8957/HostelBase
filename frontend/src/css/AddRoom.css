@@ -1,0 +1,115 @@
+/* Overall Page Centering */
+.addroom-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+  background: #f7f8fc;
+  min-height: 100vh;
+}
+
+/* Card Container */
+.form-card {
+  background: #ffffff;
+  width: 480px;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+  font-family: "Poppins", sans-serif;
+}
+
+.form-card h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #222;
+  text-align: center;
+}
+
+.subtitle {
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+/* Inputs */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 6px;
+  display: block;
+}
+
+input,
+select {
+  /* width: 100%; */
+  padding: 12px;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  outline: none;
+  font-size: 15px;
+  background: #fafafa;
+}
+
+input:focus,
+select:focus {
+  border-color: #4c8bf5;
+  background: #fff;
+}
+
+.students-checkbox-list {
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  padding: 10px;
+  background: #fafafa;
+  max-height: 150px;     /* scrollable */
+  overflow-y: auto;
+}
+
+.student-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 5px;
+  cursor: pointer;
+  font-size: 15px;
+  color: #333;
+}
+
+.student-option input {
+  transform: scale(1.2); /* bigger checkbox for mobile */
+}
+
+.student-option:hover {
+  background: #f0f4ff;
+  border-radius: 6px;
+}
+
+
+/* Hint text */
+.hint {
+  font-size: 12px;
+  color: #888;
+  margin-top: 5px;
+}
+
+/* Button */
+.submit-btn {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 10px;
+  background: #4c8bf5;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.25s;
+}
+
+.submit-btn:hover {
+  background: #3b73d9;
+}

@@ -1,0 +1,208 @@
+/* =====================================================
+        STUDENT SIDEBAR (Same Style as Owner Sidebar)
+===================================================== */
+
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background: #ffffff;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 2rem 1.2rem;
+  box-shadow: 0px 0px 20px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  z-index: 100;
+}
+
+/* === Logo === */
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+  color: #1e3a8a;     /* Deep blue for student panel */
+  margin-bottom: 2rem;
+}
+
+/* === Nav Links === */
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 1rem;
+  color: #444;
+  font-weight: 500;
+  transition: 0.25s ease;
+}
+
+.link svg {
+  height: 20px;
+  width: 20px;
+}
+
+/* Hover Effect (same as owner) */
+.link:hover {
+  background: #e0f2fe;   /* Light blue hover */
+  color: #0284c7;        /* Blue text */
+  transform: translateX(4px);
+}
+
+/* Active Link */
+.link.active {
+  background: #0284c7;   /* Primary Blue */
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+}
+
+.link.active svg {
+  stroke: #fff;
+}
+/* =====================================================
+        LOGOUT BUTTON
+===================================================== */
+
+.logout-btn {
+  margin-top: auto;              /* 🔥 pushes button to bottom */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  border: none;
+  background: transparent;
+
+  font-size: 1rem;
+  font-weight: 500;
+  color: #dc2626;                /* Red logout color */
+
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+/* Icon size consistency */
+.logout-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Hover effect */
+.logout-btn:hover {
+  background: #fee2e2;           /* Light red */
+  color: #b91c1c;
+  transform: translateX(4px);
+}
+
+/* Optional: focus style */
+.logout-btn:focus {
+  outline: none;
+}
+
+/* =====================================================
+        MOBILE SIDEBAR
+===================================================== */
+
+.hamburger {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background: white;
+  border: none;
+  padding: 8px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  cursor: pointer;
+  display: none;
+  z-index: 200;
+}
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+/* Container */
+.skeleton-container {
+  padding: 20px;
+}
+
+/* Base skeleton */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e4e4e4 37%,
+    #f0f0f0 63%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 1.2s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+/* Variants */
+.skeleton-logo {
+  width: 120px;
+  height: 24px;
+  margin-bottom: 25px;
+}
+
+.skeleton-link {
+  height: 18px;
+  width: 80%;
+  margin: 15px 0;
+}
+
+.skeleton-icon {
+  height: 18px;
+  width: 18px;
+  margin-right: 10px;
+}
+
+/* Row layout */
+.skeleton-row {
+  display: flex;
+  align-items: center;
+}
+
+/* Animation */
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+/* Mobile Behavior */
+@media (max-width: 900px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  /* Overlay background */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 50;
+  }
+}

@@ -1,0 +1,91 @@
+.students-container {
+  padding: 20px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.students-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+/* Clean card */
+.student-card-simple {
+  background: #fff;
+  padding: 18px;
+  border-radius: 14px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  transition: 0.2s ease;
+}
+
+.student-card-simple:hover {
+  transform: translateY(-3px);
+}
+
+.student-name {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.info-box p,
+.parent-box p {
+  margin: 4px 0;
+  font-size: 15px;
+}
+
+.parent-box {
+  margin-top: 12px;
+  padding: 10px;
+  background: #f7f7f7;
+  border-radius: 10px;
+}
+
+.no-parent {
+  color: #999;
+}
+
+/* Edit button */
+.edit-details-btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 12px;
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+edit-details-btn:hover {
+  background: #1e4dbd;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+}
+
+.parent-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 25px;
+  width: 350px;
+  border-radius: 12px;
+}

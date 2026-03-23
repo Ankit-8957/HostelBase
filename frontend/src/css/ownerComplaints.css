@@ -1,0 +1,128 @@
+.owner-complaints-page {
+  padding: 2rem;
+  width: 100%;
+  font-family: "Poppins", sans-serif;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #4f46e5;
+  margin-bottom: 2rem;
+}
+
+.complaints-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 1.5rem;
+}
+
+.complaint-card {
+  background: #fff;
+  padding: 1.4rem;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  transition: 0.2s;
+}
+
+.complaint-card:hover {
+  transform: translateY(-4px);
+}
+
+.complaint-card .top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+
+.complaint-card h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.status {
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.status.pending {
+  background: #fff3cd;
+  color: #b58b00;
+}
+
+.status.pending {
+  background: #fff3cd;
+  color: #b58b00;
+}
+
+.status.in-progress {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status.resolved {
+  background: #d1fae5;
+  color: #047857;
+}
+
+.status.rejected {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+
+.status.in\ progress {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status.resolved {
+  background: #d1fae5;
+  color: #047857;
+}
+
+.status.rejected {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+  padding: 0.55rem 0.8rem;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn.resolve {
+  background: #10b981;
+  color: white;
+}
+
+.btn.progress {
+  background: #3b82f6;
+  color: white;
+}
+
+.btn.reject {
+  background: #ef4444;
+  color: white;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}

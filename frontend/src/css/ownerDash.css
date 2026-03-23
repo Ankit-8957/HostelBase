@@ -1,0 +1,35 @@
+/* ===========================================
+   OWNER DASHBOARD WRAPPER LAYOUT
+=========================================== */
+
+.owner-dash-container {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  background: #f4f5fa;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Main content beside sidebar */
+.owner-main {
+  flex: 1;
+  padding: 2rem;
+  margin-left: 250px; /* Width of OwnerSidebar */
+  transition: all 0.3s ease;
+}
+
+/* When sidebar collapses */
+.sidebar-collapsed + .owner-main {
+  margin-left: 80px; /* Collapsed sidebar width */
+}
+
+/* ===========================================
+   RESPONSIVE
+=========================================== */
+@media (max-width: 900px) {
+  .owner-main {
+    margin-left: 0;   /* Sidebar becomes hidden */
+    padding: 1.5rem;
+  }
+}

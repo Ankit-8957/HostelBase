@@ -1,0 +1,148 @@
+/* ===========================================
+      OWNER SIDEBAR (Desktop)
+=========================================== */
+.owner-sidebar {
+  width: 250px;
+  height: 100vh;
+  background: #ffffff;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 2rem 1.2rem;
+  box-shadow: 0px 0px 20px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+  color: #4f46e5;
+  margin-bottom: 2rem;
+}
+
+/* Navigation Links */
+.owner-sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 1rem;
+  color: #444;
+  font-weight: 500;
+  transition: 0.25s ease;
+}
+
+.link svg {
+  height: 20px;
+  width: 20px;
+}
+
+/* Hover */
+.link:hover {
+  background: #eef2ff;
+  color: #4f46e5;
+  transform: translateX(4px);
+}
+
+/* Active link */
+.link.active {
+  background: #4f46e5;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
+}
+
+.link.active svg {
+  stroke: #fff;
+}
+/* =====================================================
+        LOGOUT BUTTON
+===================================================== */
+
+.logout-btn {
+  margin-top: auto;              /* 🔥 pushes button to bottom */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  border: none;
+  background: transparent;
+
+  font-size: 1rem;
+  font-weight: 500;
+  color: #dc2626;                /* Red logout color */
+
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+/* Icon size consistency */
+.logout-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Hover effect */
+.logout-btn:hover {
+  background: #fee2e2;           /* Light red */
+  color: #b91c1c;
+  transform: translateX(4px);
+}
+
+/* Optional: focus style */
+.logout-btn:focus {
+  outline: none;
+}
+
+/* ===========================================
+      MOBILE SIDEBAR
+=========================================== */
+.owner-hamburger {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background: white;
+  border: none;
+  padding: 8px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  cursor: pointer;
+  display: none;
+  z-index: 200;
+}
+
+/* Sidebar hidden on mobile */
+@media (max-width: 900px) {
+  .owner-sidebar {
+    transform: translateX(-100%);
+  }
+
+  .owner-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .owner-hamburger {
+    display: block;
+  }
+
+  /* Click outside overlay */
+  .owner-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 50;
+  }
+}

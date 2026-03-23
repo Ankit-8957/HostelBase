@@ -1,0 +1,120 @@
+.payment-container {
+  padding: 1.5rem;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Header */
+.payment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.payment-header h1 {
+  font-size: 1.8rem;
+}
+
+/* Summary Cards */
+.payment-summary {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.summary-card {
+  flex: 1;
+  min-width: 160px;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  background: white;
+  text-align: center;
+}
+
+.paid-box {
+  border-left: 6px solid #22c55e;
+}
+
+.pending-box {
+  border-left: 6px solid #ef4444;
+}
+
+.summary-card h3 {
+  font-size: 1rem;
+  color: #444;
+}
+
+.summary-card p {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-top: 6px;
+}
+
+/* Monthly Payments List */
+.payments-table {
+  margin-top: 2rem;
+}
+
+.payment-row {
+  background: #ffffff;
+  margin: 8px 0;
+  padding: 1rem;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.payment-left h4 {
+  font-size: 1.1rem;
+}
+
+.payment-left p {
+  color: #555;
+  margin-top: 3px;
+}
+
+/* Status Icons */
+.paid-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #22c55e;
+  font-weight: 600;
+}
+
+/* Pay Button */
+.pay-btn {
+  background: #3747c9;
+  color: white;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.pay-btn:hover {
+  background: #2837a6;
+}
+
+/* Mobile Optimization */
+@media (max-width: 600px) {
+  .payment-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .payment-right {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

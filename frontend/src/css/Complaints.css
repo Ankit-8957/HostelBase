@@ -1,0 +1,74 @@
+.complaint-container {
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+.complaint-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  margin-top: 2rem;
+}
+
+.complaint-tabs button {
+  padding: 10px 20px;
+  border: none;
+  background: #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.complaint-tabs .active {
+  background: #4a7cff;
+  color: white;
+}
+
+.complaint-form label {
+  font-weight: 600;
+  margin-top: 10px;
+  display: block;
+}
+
+.complaint-form input,
+.complaint-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.complaint-form button {
+  margin-top: 15px;
+  background: #4a7cff;
+  padding: 12px 20px;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.complaint-list .complaint-card {
+  background: #f8f8f8;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  border-left: 6px solid #4a7cff;
+}
+
+.complaint-footer {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.status.pending {
+  color: #f39c12;
+  font-weight: 600;
+}
+
+.status.resolved {
+  color: #2ecc71;
+  font-weight: 600;
+}

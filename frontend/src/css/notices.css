@@ -1,0 +1,92 @@
+.notice-container {
+  padding: 1.5rem;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Header */
+.notice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notice-header h1 {
+  font-size: 1.8rem;
+}
+
+/* Notice List */
+.notice-list {
+  margin-top: 1.5rem;
+}
+
+/* Notice Card */
+.notice-card {
+  background: #ffffff;
+  padding: 1rem;
+  border-radius: 14px;
+  margin-bottom: 1rem;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  transition: 0.2s;
+}
+
+.notice-card:hover {
+  transform: translateY(-3px);
+}
+
+/* Top Row: Title + Tag */
+.notice-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notice-top h3 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+/* Tags */
+.tag {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.tag.important {
+  background: #fde047;
+  color: #b45309;
+}
+
+.tag.general {
+  background: #dbeafe;
+  color: #1e3a8a;
+}
+
+.tag.urgent {
+  background: #fecaca;
+  color: #b91c1c;
+}
+
+/* Date */
+.notice-date {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* Message */
+.notice-msg {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.4rem;
+}
+
+/* Mobile Optimization */
+@media (max-width: 600px) {
+  .notice-top h3 {
+    font-size: 1rem;
+  }
+}

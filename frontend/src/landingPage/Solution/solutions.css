@@ -1,0 +1,113 @@
+/* =========================================
+   SOLUTIONS PAGE
+========================================= */
+
+.solutions-container {
+  width: 100%;
+  background: #f4f6fb;
+  padding-bottom: 4rem;
+  font-family: "Poppins", sans-serif;
+  margin-top: 2rem;
+}
+
+/* Hero */
+.solutions-hero {
+  text-align: center;
+  padding: 4rem 1.5rem;
+  background: #ffffff;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+}
+
+.solutions-hero h1 {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: #232f55;
+}
+
+.solutions-hero p {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: #555;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Grid */
+.solutions-grid {
+  margin: 4rem auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  padding: 0 2rem;
+}
+
+.solution-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 18px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.solution-card svg {
+  color: #4f46e5;
+  margin-bottom: 1rem;
+}
+
+.solution-card h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #1f2555;
+}
+
+.solution-card p {
+  margin-top: 0.6rem;
+  color: #555;
+  line-height: 1.5rem;
+}
+
+.solution-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.25);
+}
+
+/* CTA */
+.solutions-cta {
+  margin: 3rem auto 0;
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+
+.solutions-cta h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #232f55;
+}
+
+.solutions-cta p {
+  margin-top: 1rem;
+  color: #555;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-btn {
+  margin-top: 2rem;
+  padding: 0.9rem 2rem;
+  background: #4f46e5;
+  color: white;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.cta-btn:hover {
+  background: #3f3acb;
+}
