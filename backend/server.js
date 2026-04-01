@@ -16,6 +16,7 @@ import { Strategy as LocalStrategy } from "passport-local";
 import ownerRoute from "./routes/owner.js";
 import studentRoute from "./routes/student.js";
 import authRoute from "./routes/auth.js";
+import Razorpay from "razorpay";
 
 // Middlewares
 app.use(cors({
@@ -79,6 +80,12 @@ passport.deserializeUser(async (data, done) => {
   } catch (err) {
     done(err);
   }
+});
+
+
+export const razorpayInstance = new Razorpay({
+  key_id: process.env.key_id,
+  key_secret: process.env.key_secret,
 });
 
 // PASSPORT STRATEGIES

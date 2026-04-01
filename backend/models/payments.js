@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
 const paymentSchema = new mongoose.Schema({
-  studentName: {
-    type: String,
+  student: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Student",
     required: true,
-    trim: true,
   },
 
   room: {
@@ -20,14 +20,34 @@ const paymentSchema = new mongoose.Schema({
 
   status: {
     type: String,
-    enum: ["Paid", "Pending", "Overdue"],
-    default: "Pending",
+    enum: ["created", "paid", "failed"],
+    default: "created",
   },
 
-  date: {
-    type: Date,
-    required: true,
+  // 🔥 Razorpay fields
+  razorpayOrderId: {
+    type: String,
   },
+
+  razorpayPaymentId: {
+    type: String,
+  },
+
+  razorpaySignature: {
+    type: String,
+  },
+
+  paymentMethod: {
+    type: String, // UPI, Card, Netbanking
+  },
+
+  paidAt: {
+    type: Date,
+  },
+  month: {
+  type: String,
+  required: true,
+}
 
 }, { timestamps: true });
 
