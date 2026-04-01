@@ -16,20 +16,24 @@ const roomSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+
   hostelId: {
     type: String,
     required: true,
-    trim: true,  // ❌ removed unique: true
+    trim: true,
   },
+
   status: {
     type: String,
     enum: ["Available", "Partially Filled", "Full"],
     default: "Available",
   },
+
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Owner"
   },
+
   students: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -38,5 +42,10 @@ const roomSchema = new mongoose.Schema({
   ],
 
 }, { timestamps: true });
+
+
+// ✅ 🔥 ADD THIS LINE
+roomSchema.index({ roomNo: 1, hostelId: 1 }, { unique: true });
+
 
 export default mongoose.model("Room", roomSchema);

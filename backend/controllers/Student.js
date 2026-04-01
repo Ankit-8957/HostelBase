@@ -6,14 +6,22 @@ import Payment from "../models/payments.js";
 import { razorpayInstance } from "../server.js";
 
 export const StudentOverview = async (req, res) => {
-
+ 
   let totalNotice = await notice.countDocuments({ hostelId: req.user.hostelId });
   let totalComplaint = await Complaint.countDocuments({
     studentId: req.user._id
   });
+  let totalPayment = await Payment.countDocuments({ student: req.user._id });
+  res.json({ totalNotice, totalComplaint, totalPayment });
 
-  res.json({ totalNotice, totalComplaint });
+}
 
+export const getRecentNotices = async (req, res) => {
+  let hostelId = req.user.hostelId;
+  const notices = await notice.find({ hostelId })
+    .sort({ createdAt: -1 })
+    .limit(3);
+  res.json(notices);
 }
 
 export const myComplaint = async (req, res) => {
@@ -122,6 +130,7 @@ export const createOrder = async (req, res) => {
       student: req.user._id,
       amount,
       month,
+      hostelId: student.hostelId,
       room: student.room,
       status: "created",
     });

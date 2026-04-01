@@ -1,40 +1,81 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../../css/ownerPayment.css";
-import { Calendar, CheckCircle, XCircle, IndianRupee } from "lucide-react";
+import { Calendar, CheckCircle, XCircle } from "lucide-react";
+import api from "../../axios";
 
 const OwnerPayment = () => {
-  const [students, setStudents] = useState([
-    { id: 1, name: "Rahul Verma", room: "A-102", amount: 2500, status: "Paid", date: "2025-11-01" },
-    { id: 2, name: "Ankit Singh", room: "A-105", amount: 2500, status: "Pending", date: "2025-11-05" },
-    { id: 3, name: "Vikas Sharma", room: "B-203", amount: 2500, status: "Overdue", date: "2025-10-28" },
-  ]);
+  const [payments, setPayments] = useState([]);
+  const [detail, setDetail] = useState({
+     totalPayment: 0,
+     totalStudents: 0,
+  });
+
+  useEffect(() => {
+    const paymentData = async () => {
+      try {
+        const res = await api.get("/owner/payment");
+        const detailRes = await api.get("/dashboard/overview");
+        setDetail(detailRes.data);
+
+        // 🔥 Map backend data to UI format
+        const formatted = res.data.payments.map((p) => ({
+          id: p._id,
+          name: p.student?.name || "N/A",
+          room: p.room?.roomNo || "N/A",
+          amount: p.amount,
+          status:
+            p.status === "paid"
+              ? "Paid"
+              : p.status === "created"
+                ? "Pending"
+                : "Overdue",
+          date: new Date(p.updatedAt).toLocaleDateString(),
+        }));
+
+        setPayments(formatted);
+
+      } catch (error) {
+        console.error("Error fetching payments:", error);
+      }
+    };
+
+    paymentData();
+  }, []);
+
+  // 🔥 Summary calculations
+  const totalPaid = payments
+    .filter((p) => p.status === "Paid")
+    .reduce((acc, curr) => acc + curr.amount, 0);
+
+  const pendingCount = payments.filter((p) => p.status === "Pending").length;
+  const overdueCount = payments.filter((p) => p.status === "Overdue").length;
 
   return (
     <div className="payment-container">
       <h1>💳 Payment Management</h1>
 
-      {/* Payment Summary Cards */}
+      {/* Summary Cards */}
       <div className="summary-cards">
         <div className="card">
           <CheckCircle size={32} />
           <h3>Total Paid</h3>
-          <p>₹ {students.filter(s => s.status === "Paid").length * 2500}</p>
+          <p>₹ {totalPaid}</p>
         </div>
 
         <div className="card pending">
           <Calendar size={32} />
           <h3>Pending</h3>
-          <p>{students.filter(s => s.status === "Pending").length}</p>
+          <p>{12*2000*detail.totalStudents - detail.totalPayment*2000}</p>
         </div>
 
         <div className="card overdue">
           <XCircle size={32} />
           <h3>Overdue</h3>
-          <p>{students.filter(s => s.status === "Overdue").length}</p>
+          <p>{overdueCount}</p>
         </div>
       </div>
 
-      {/* Student Payment Table */}
+      {/* Table */}
       <table className="payment-table">
         <thead>
           <tr>
@@ -42,22 +83,22 @@ const OwnerPayment = () => {
             <th>Room</th>
             <th>Amount</th>
             <th>Status</th>
-            <th>Last Paid</th>
+            <th>Date</th>
           </tr>
         </thead>
 
         <tbody>
-          {students.map((stu) => (
-            <tr key={stu.id}>
-              <td>{stu.name}</td>
-              <td>{stu.room}</td>
-              <td>₹ {stu.amount}</td>
+          {payments.map((p) => (
+            <tr key={p.id}>
+              <td>{p.name}</td>
+              <td>{p.room}</td>
+              <td>₹ {p.amount}</td>
 
-              <td className={`status ${stu.status.toLowerCase()}`}>
-                {stu.status}
+              <td className={`status ${p.status.toLowerCase()}`}>
+                {p.status}
               </td>
 
-              <td>{stu.date}</td>
+              <td>{p.date}</td>
             </tr>
           ))}
         </tbody>

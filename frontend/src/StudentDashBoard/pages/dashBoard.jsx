@@ -8,14 +8,18 @@ import api from "../../axios";
 const Dashboard = () => {
   const [detail, setDetail] = useState({
     totalNotice: 0,
-    totalComplaint: 0
+    totalComplaint: 0,
+    totalPayment: 0,
   });
+  const [notices, setNotices] = useState([]);
 
   useEffect(() => {
   const fetchData = async () => {
     try {
       const res = await api.get("/Student/overview");
       setDetail(res.data);
+      const noticesRes = await api.get("/recent-notices");
+      setNotices(noticesRes.data);
     } catch (err) {
       console.log(err);
     }
@@ -39,12 +43,12 @@ const Dashboard = () => {
 
         <div className="stat-card">
           <h3>Total Fees Paid</h3>
-          <p>₹ 45,000</p>
+          <p>₹ {detail.totalPayment*2000}</p>
         </div>
 
         <div className="stat-card">
           <h3>Pending Fees</h3>
-          <p>₹ 5,000</p>
+          <p>₹ {12*2000 - detail.totalPayment*2000}</p>
         </div>
 
         <div className="stat-card">
@@ -62,9 +66,12 @@ const Dashboard = () => {
       <div className="section">
         <h2>Recent Notices</h2>
         <ul className="notice-list">
-          <li>🔹 Mess will be closed on Sunday.</li>
-          <li>🔹 Water supply maintenance at 6 PM.</li>
-          <li>🔹 Hostel cleaning on Friday.</li>
+          {notices.length === 0 && <p>No notices found.</p>}
+          {notices.map((notice) => (
+            <li key={notice._id}>
+              <p>{notice.message}</p>
+            </li>
+          ))}
         </ul>
       </div>
 

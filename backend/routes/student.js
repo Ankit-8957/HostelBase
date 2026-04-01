@@ -1,10 +1,11 @@
 import express from "express";
 const router = express.Router();
 import { isLoggedIn, isStudent } from "../middleware.js";
-import { addComplaint, myComplaint , Info, updateInfo, StudentOverview, createOrder, verifyPayment, getPayments } from "../controllers/Student.js";
+import { addComplaint, myComplaint , Info, updateInfo, StudentOverview, createOrder, verifyPayment, getPayments, getRecentNotices } from "../controllers/Student.js";
 import { complaint } from "../controllers/Owner.js";
 
 router.get("/Student/overview",isLoggedIn, asyncWrap(StudentOverview));
+router.get("/recent-notices",isLoggedIn, asyncWrap(getRecentNotices));
 router.get("/complaint",isLoggedIn, asyncWrap(complaint));
 router.post("/complaint/add",isLoggedIn, isStudent, asyncWrap(addComplaint));
 router.get("/my-complaint",isLoggedIn, isStudent, asyncWrap(myComplaint));

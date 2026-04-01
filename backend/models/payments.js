@@ -8,14 +8,19 @@ const paymentSchema = new mongoose.Schema({
   },
 
   room: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Room",
     required: true,
-    trim: true,
   },
 
   amount: {
     type: Number,
     required: true,
+  },
+  hostelId: {
+    type: String,
+    required: true,
+    trim: true,
   },
 
   status: {

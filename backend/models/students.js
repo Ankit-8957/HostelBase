@@ -60,8 +60,8 @@ const studentSchema = new mongoose.Schema({
   },
 
   room: {
-    type: String,
-    trim: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Room",
   },
 
   admissionDate: {

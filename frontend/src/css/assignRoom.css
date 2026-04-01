@@ -1,0 +1,113 @@
+:root {
+  --primary: #4f46e5;
+  --primary-light: #6366f1;
+  --bg: #f3f4f6;
+  --card: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+}
+
+/* Layout */
+.app {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg);
+  font-family: "Inter", sans-serif;
+}
+
+.main {
+  flex: 1;
+  padding: 40px;
+}
+
+.header {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+/* Grid */
+.grid {
+  display: flex;
+  gap: 30px;
+}
+
+.section {
+  width: 300px;
+}
+
+.section h3 {
+  margin-bottom: 15px;
+  color: var(--muted);
+}
+
+/* Cards */
+.card {
+  background: var(--card);
+  padding: 16px;
+  border-radius: 16px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.card p {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+/* Active */
+.card.active {
+  border: 2px solid var(--primary);
+  background: #eef2ff;
+}
+
+/* Disabled */
+.card.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Button */
+.assign-btn {
+  margin-top: 30px;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.assign-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(79, 70, 229, 0.25);
+}
+
+/* Message */
+.message {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.message.success {
+  color: #16a34a;
+  background: #dcfce7;
+}
+
+.message.error {
+  color: #dc2626;
+  background: #fee2e2;
+}

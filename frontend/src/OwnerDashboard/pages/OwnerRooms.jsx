@@ -14,13 +14,16 @@ const OwnerRooms = () => {
   const handleRooms = () => {
     navigate("/owner/dashboard/rooms/add-room");
   };
+  const handleAssignRooms = () => {
+    navigate("/owner/dashboard/rooms/assign-room");
+  };
 
   useEffect(() => {
     const fetchRooms = async () => {
       setLoading(true);
       try {
         const res = await api.get("/rooms");
-
+       
         // ✅ important fix (based on backend response)
         setRooms(res.data || []);
 
@@ -44,6 +47,9 @@ const OwnerRooms = () => {
         <h1>🏨 Hostel Rooms</h1>
         <button className="add-btn" onClick={handleRooms}>
           <Plus size={18} /> Add Room
+        </button>
+        <button className="add-btn" onClick={handleAssignRooms}>
+          <Plus size={18} /> Assign Room
         </button>
       </div>
 

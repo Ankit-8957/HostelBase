@@ -15,18 +15,18 @@ const AddRoom = () => {
   });
 
   // Fetch students
-  useEffect(() => {
-    const fetchStudents = async () => {
-      try {
-        const res = await api.get("/getStudents");
-        setStudents(res.data.students || res.data); // ✅ safe
-      } catch (err) {
-        console.log("Fetch error:", err);
-        toast.error("Failed to load students");
-      }
-    };
-    fetchStudents();
-  }, []);
+  // useEffect(() => {
+  //   const fetchStudents = async () => {
+  //     try {
+  //       const res = await api.get("/getStudents");
+  //       setStudents(res.data.students || res.data); // ✅ safe
+  //     } catch (err) {
+  //       console.log("Fetch error:", err);
+  //       toast.error("Failed to load students");
+  //     }
+  //   };
+  //   fetchStudents();
+  // }, []);
 
   // Handle input change
   const handleChange = (e) => {
@@ -34,21 +34,21 @@ const AddRoom = () => {
   };
 
   // Handle student selection with capacity check
-  const handleStudentSelect = (id, checked) => {
-    let updated = [...formData.students];
+  // const handleStudentSelect = (id, checked) => {
+  //   let updated = [...formData.students];
 
-    if (checked) {
-      if (updated.length >= Number(formData.capacity)) {
-        toast.error("Cannot select more than capacity");
-        return;
-      }
-      updated.push(id);
-    } else {
-      updated = updated.filter((stu) => stu !== id);
-    }
+  //   if (checked) {
+  //     if (updated.length >= Number(formData.capacity)) {
+  //       toast.error("Cannot select more than capacity");
+  //       return;
+  //     }
+  //     updated.push(id);
+  //   } else {
+  //     updated = updated.filter((stu) => stu !== id);
+  //   }
 
-    setFormData({ ...formData, students: updated });
-  };
+  //   setFormData({ ...formData, students: updated });
+  // };
 
   // Submit form
   const handleSubmit = async (e) => {
@@ -60,7 +60,7 @@ const AddRoom = () => {
         capacity: Number(formData.capacity), // ✅ FIX
       };
 
-      console.log("Sending:", payload); // DEBUG
+      // console.log("Sending:", payload); // DEBUG
 
       await api.post("/addRoom", payload);
 
@@ -120,7 +120,7 @@ const AddRoom = () => {
             />
           </div>
 
-          {/* STUDENTS */}
+          {/* STUDENTS
           <div className="form-group">
             <label>Select Students</label>
 
@@ -138,7 +138,7 @@ const AddRoom = () => {
                 </label>
               ))}
             </div>
-          </div>
+          </div> */}
 
           <button type="submit" className="submit-btn">
             Add Room

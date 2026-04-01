@@ -22,8 +22,10 @@ import LandingFeatures from "./landingPage/Feature/FeaturePage";
 import Solutions from "./landingPage/Solution/Solutions";
 import ContactPage from "./landingPage/Contact/ContactPage";
 import AddRoom from "./OwnerDashboard/pages/AddRoom";
+import AssignRoom from "./OwnerDashboard/pages/assignRoom";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoomRoute from "./ProtectedRoomRoute";
+
 axios.defaults.withCredentials = true;
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -53,6 +55,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/owner/dashboard/payments" element={<OwnerDash><OwnerPayment /></OwnerDash>}></Route>
         <Route path="/owner/dashboard/rooms" element={<OwnerDash><OwnerRooms /></OwnerDash>}></Route>
         <Route path="/owner/dashboard/rooms/add-room" element={<OwnerDash><AddRoom /></OwnerDash>}></Route>
+        <Route path="/owner/dashboard/rooms/assign-room" element={<OwnerDash><AssignRoom /></OwnerDash>}></Route>
         <Route path="/owner/dashboard/complaints" element={<OwnerDash><OwnerComplaints /></OwnerDash>}></Route>
         <Route path="/owner/dashboard/notices" element={<OwnerDash><OwnerNotices /></OwnerDash>}></Route>
         <Route path="/owner/dashboard/profile" element={<OwnerDash><OwnerProfile /></OwnerDash>}></Route>
