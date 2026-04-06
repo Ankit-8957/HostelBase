@@ -17,6 +17,7 @@ import ownerRoute from "./routes/owner.js";
 import studentRoute from "./routes/student.js";
 import authRoute from "./routes/auth.js";
 import Razorpay from "razorpay";
+import nodemailer from "nodemailer";
 
 // Middlewares
 app.use(cors({
@@ -86,6 +87,14 @@ passport.deserializeUser(async (data, done) => {
 export const razorpayInstance = new Razorpay({
   key_id: process.env.key_id,
   key_secret: process.env.key_secret,
+});
+
+export const transport = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.EMAIL_PASSWORD,
+  },
 });
 
 // PASSPORT STRATEGIES
