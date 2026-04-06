@@ -2,6 +2,8 @@ import passport from "passport";
 import bcrypt from "bcrypt";
 import Student from "../models/students.js";
 import Owner from "../models/owner.js";
+import { sendContactEmail } from "../utils/sendEmail.js";
+
 
 
 export const OwnerSignup = async (req, res, next) => {
@@ -215,3 +217,33 @@ export const logout = (req, res) => {
     res.json({ message: "Logged out" });
   });
 }
+
+export const contact = async (req, res) => {
+  const { name, email, subject, message } = req.body;
+
+  // ✅ Validation
+  if (!name || !email || !subject || !message) {
+    return res.status(400).json({
+      success: false,
+      message: "All fields are required",
+    });
+  }
+
+  try {
+    // ✅ Use your utility function (CLEAN & REUSABLE)
+    await sendContactEmail({ name, email, subject, message });
+
+    res.status(200).json({
+      success: true,
+      message: "Message sent successfully!",
+    });
+
+  } catch (err) {
+    console.log("EMAIL ERROR:", err);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to send message",
+    });
+  }
+};

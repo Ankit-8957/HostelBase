@@ -142,6 +142,16 @@ textarea {
   border-radius: 14px;
 }
 
+.status-msg {
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+.send-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 /* RESPONSIVE */
 @media (max-width: 900px) {
   .contact-wrapper {

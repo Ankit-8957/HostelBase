@@ -30,6 +30,7 @@ const OwnerPayment = () => {
                 ? "Pending"
                 : "Overdue",
           date: new Date(p.updatedAt).toLocaleDateString(),
+          month: p.month,
         }));
 
         setPayments(formatted);
@@ -84,6 +85,7 @@ const OwnerPayment = () => {
             <th>Amount</th>
             <th>Status</th>
             <th>Date</th>
+            <th>Month</th>
           </tr>
         </thead>
 
@@ -99,6 +101,7 @@ const OwnerPayment = () => {
               </td>
 
               <td>{p.date}</td>
+              <td>{p.month}</td>
             </tr>
           ))}
         </tbody>

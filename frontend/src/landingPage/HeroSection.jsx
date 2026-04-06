@@ -1,7 +1,13 @@
 import "../css/HeroSection.css";
+// import {useNavigate} from "react-router-dom";
 
 
 const Hero = () => {
+  // const navigate = useNavigate();
+  // const handleSignup = () => {
+  //   navigate("/signup"); 
+  // };
+
   return (
     <section className="hero">
       {/* Left Section */}
@@ -13,7 +19,9 @@ const Hero = () => {
           Streamline operations, boost bookings, and create a connected
           community.
         </p>
-        <button className="cta-btn">Get Started Free</button>
+        {/* <button className="cta-btn" onClick={handleSignup}>
+          Sign Up
+        </button> */}
       </div>
 
       {/* Right Section */}
