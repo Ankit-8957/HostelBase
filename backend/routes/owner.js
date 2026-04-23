@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 import { isOwner, isLoggedIn, checkUser } from "../middleware.js";
-import { addNotice, addRoom, deleteComplaint, deleteNotice, getStudents, myInfo, overview, room, updateOwner, notice, ownerPayment, assignRoom, recentComplaints} from "../controllers/Owner.js";
+import { addNotice, addRoom, deleteComplaint, deleteNotice, getStudents, myInfo, overview, room, updateOwner, notice, ownerPayment, assignRoom, recentComplaints,paymetStatus} from "../controllers/Owner.js";
 
 
 router.get("/dashboard/overview",isLoggedIn, asyncWrap(overview));
@@ -15,6 +15,7 @@ router.put("/updateOwner", isOwner, asyncWrap(updateOwner));
 router.get("/notice",checkUser, asyncWrap(notice));
 router.post("/notice/add",checkUser, asyncWrap(addNotice));
 router.get("/owner/payment",isLoggedIn, isOwner, asyncWrap(ownerPayment));
+router.get("/paymentStatus",isLoggedIn, isOwner, asyncWrap(paymetStatus));
 router.delete("/notice/:id", asyncWrap(deleteNotice));
 router.patch("/complaint/:id",checkUser, asyncWrap(deleteComplaint));
 

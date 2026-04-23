@@ -17,7 +17,7 @@ export const overview = async (req, res) => {
     occupied: { $gt: 0 },
   });
   const totalComplaint = await Complaint.countDocuments({ hostelId });
-  const totalPayment = await Payment.countDocuments({hostelId});
+  const totalPayment = await Payment.countDocuments({ hostelId });
 
   res.json({ totalStudents, totalRooms, occupiedRooms, totalComplaint, totalPayment });
 }
@@ -359,3 +359,29 @@ export const ownerPayment = async (req, res) => {
 
 }
 
+export const paymetStatus = async (req, res) => {
+  try {
+    const hostelId = req.user.hostelId;
+
+    // Fetch all paid payments, most recent first
+    const payments = await Payment.find({ hostelId, status: "paid" }).sort({ paidAt: -1 });
+
+    // Build studentId → lastPaidDate map (keep only the most recent paid record per student)
+    const lastPaidMap = {};
+    for (const p of payments) {
+      const sid = p.student.toString();
+      if (!lastPaidMap[sid]) {
+        lastPaidMap[sid] = p.paidAt; // most recent paid date
+      }
+    }
+
+    // dueDate = 1st of the current month (rent due on 1st every month)
+    const now = new Date();
+    const dueDate = new Date(now.getFullYear(), now.getMonth(), 1);
+
+    res.json({ success: true, lastPaidMap, dueDate });
+  } catch (error) {
+    console.log("Payment status error: ", error);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+}
