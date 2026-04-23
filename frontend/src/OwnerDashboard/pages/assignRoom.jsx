@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import api from "../../axios";
 import "../../css/assignRoom.css";
+import toast from "react-hot-toast";
 
 export default function AssignRoom() {
   const [students, setStudents] = useState([]);
   const [rooms, setRooms] = useState([]);
   const [selectedStudents, setSelectedStudents] = useState([]);
   const [selectedRoom, setSelectedRoom] = useState("");
-  const [message, setMessage] = useState("");
 
   useEffect(() => {
     fetchStudents();
@@ -20,6 +20,7 @@ export default function AssignRoom() {
       setStudents(res.data);
     } catch (err) {
       console.error(err);
+      toast.error("Failed to load students ❌");
     }
   };
 
@@ -29,10 +30,11 @@ export default function AssignRoom() {
       setRooms(res.data);
     } catch (err) {
       console.error(err);
+      toast.error("Failed to load rooms ❌");
     }
   };
 
-  // ✅ Toggle multi select
+  // Toggle select
   const toggleStudent = (id) => {
     if (selectedStudents.includes(id)) {
       setSelectedStudents(selectedStudents.filter((s) => s !== id));
@@ -43,18 +45,18 @@ export default function AssignRoom() {
 
   const handleAssign = async () => {
     if (selectedStudents.length === 0 || !selectedRoom) {
-      setMessage("Select students and room ❌");
+      toast.error("Select students and room ❌");
       return;
     }
 
     const room = rooms.find((r) => r._id === selectedRoom);
 
-    // ✅ Capacity check
+    // Capacity check
     if (
       selectedStudents.length + (room?.students?.length || 0) >
       room.capacity
     ) {
-      setMessage("Room capacity exceeded ❌");
+      toast.error("Room capacity exceeded ❌");
       return;
     }
 
@@ -64,15 +66,15 @@ export default function AssignRoom() {
         roomId: selectedRoom,
       });
 
-      setMessage("Room assigned successfully ✅");
+      toast.success("Room assigned successfully ✅");
 
       // refresh UI
       fetchRooms();
       setSelectedStudents([]);
       setSelectedRoom("");
     } catch (err) {
-      setMessage("Error assigning room ❌");
       console.error(err);
+      toast.error("Error assigning room ❌");
     }
   };
 
@@ -128,16 +130,6 @@ export default function AssignRoom() {
         <button className="assign-btn" onClick={handleAssign}>
           Assign Room 🚀
         </button>
-
-        {message && (
-          <p
-            className={`message ${
-              message.includes("successfully") ? "success" : "error"
-            }`}
-          >
-            {message}
-          </p>
-        )}
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Wallet, CheckCircle, XCircle } from "lucide-react";
 import api from "../../axios.js";
 import "../../css/payment.css";
+import toast from "react-hot-toast";
 
 const Payments = () => {
   const [payments, setPayments] = useState([]);
@@ -12,28 +13,27 @@ const Payments = () => {
     "July","August","September","October","November","December"
   ];
 
-  // ✅ Reusable fetch function
+  // Reusable fetch
   const fetchPayments = async () => {
     try {
       const res = await api.get("/payments");
       setPayments(res.data);
     } catch (err) {
       console.error("Fetch payments failed:", err);
+      toast.error("Failed to load payments ❌");
     }
   };
 
-  // Initial load
   useEffect(() => {
     fetchPayments();
   }, []);
 
-  // Merge months with payment data
+  // Merge months
   const mergedPayments = months.map((month) => {
     const found = payments.find((p) => p.month === month);
     return found || { month, amount: 2000, status: "pending", _id: null };
   });
 
-  // Payment handler
   const handlePayment = async (entry) => {
     try {
       setLoadingId(entry.month);
@@ -67,9 +67,10 @@ const Payments = () => {
               month: entry.month,
             });
 
-            alert(`${entry.month} Payment Successful ✅`);
+            // ✅ Toast instead of alert
+            toast.success(`${entry.month} payment successful ✅`);
 
-            // ⚡ Optimistic update (instant UI)
+            // ⚡ Optimistic update
             setPayments((prev) =>
               prev.map((p) =>
                 p.month === entry.month
@@ -78,12 +79,12 @@ const Payments = () => {
               )
             );
 
-            // 🔥 Sync with backend (real data)
+            // 🔄 Sync with backend
             await fetchPayments();
 
           } catch (err) {
             console.error("Payment verification failed:", err);
-            alert("Payment verification failed ❌");
+            toast.error("Payment verification failed ❌");
           }
         },
       };
@@ -93,7 +94,7 @@ const Payments = () => {
 
     } catch (err) {
       console.error("Order creation failed:", err);
-      alert("Unable to process payment ❌");
+      toast.error("Unable to process payment ❌");
     } finally {
       setLoadingId(null);
     }
