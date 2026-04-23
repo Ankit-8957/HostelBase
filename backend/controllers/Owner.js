@@ -360,28 +360,51 @@ export const ownerPayment = async (req, res) => {
 }
 
 export const paymetStatus = async (req, res) => {
+  
   try {
     const hostelId = req.user.hostelId;
 
-    // Fetch all paid payments, most recent first
-    const payments = await Payment.find({ hostelId, status: "paid" }).sort({ paidAt: -1 });
+    // Get current month & year
+    const now = new Date();
+    const currentMonth = now.toLocaleString("default", { month: "long" });
+    const currentYear = now.getFullYear();
 
-    // Build studentId → lastPaidDate map (keep only the most recent paid record per student)
-    const lastPaidMap = {};
+    // due date = 1st of current month
+    const dueDate = new Date(currentYear, now.getMonth(), 1);
+
+    // Fetch all payments for this hostel (only paid ones)
+    const payments = await Payment.find({
+      hostelId,
+      status: "paid",
+    });
+
+    // Build studentId → status map
+    const statusMap = {};
+
     for (const p of payments) {
       const sid = p.student.toString();
-      if (!lastPaidMap[sid]) {
-        lastPaidMap[sid] = p.paidAt; // most recent paid date
+
+      const paymentMonth = p.month;
+      const paymentYear = new Date(p.paidAt).getFullYear();
+
+      // ✅ If current month is paid
+      if (paymentMonth === currentMonth && paymentYear === currentYear) {
+        statusMap[sid] = "PAID";
       }
     }
 
-    // dueDate = 1st of the current month (rent due on 1st every month)
-    const now = new Date();
-    const dueDate = new Date(now.getFullYear(), now.getMonth(), 1);
+    // Now handle students without current payment
+    // (optional: you can fetch students list if needed)
 
-    res.json({ success: true, lastPaidMap, dueDate });
+    res.json({
+      success: true,
+      statusMap,
+      dueDate,
+    });
+
   } catch (error) {
     console.log("Payment status error: ", error);
     res.status(500).json({ message: "Something went wrong" });
   }
-}
+};
+

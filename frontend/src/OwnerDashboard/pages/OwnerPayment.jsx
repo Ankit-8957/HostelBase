@@ -6,8 +6,8 @@ import api from "../../axios";
 const OwnerPayment = () => {
   const [payments, setPayments] = useState([]);
   const [detail, setDetail] = useState({
-     totalPayment: 0,
-     totalStudents: 0,
+    totalPayment: 0,
+    totalStudents: 0,
   });
 
   useEffect(() => {
@@ -42,8 +42,11 @@ const OwnerPayment = () => {
 
     paymentData();
   }, []);
+  const formatDate = (date) => {
+    return new Date(date).toLocaleDateString("en-GB");
+  };
 
-  // 🔥 Summary calculations
+  
   const totalPaid = payments
     .filter((p) => p.status === "Paid")
     .reduce((acc, curr) => acc + curr.amount, 0);
@@ -66,7 +69,7 @@ const OwnerPayment = () => {
         <div className="card pending">
           <Calendar size={32} />
           <h3>Pending</h3>
-          <p>{12*2000*detail.totalStudents - detail.totalPayment*2000}</p>
+          <p>{12 * 2000 * detail.totalStudents - detail.totalPayment * 2000}</p>
         </div>
 
         <div className="card overdue">
@@ -100,7 +103,7 @@ const OwnerPayment = () => {
                 {p.status}
               </td>
 
-              <td>{p.date}</td>
+              <td>{formatDate(p.date)}</td>
               <td>{p.month}</td>
             </tr>
           ))}

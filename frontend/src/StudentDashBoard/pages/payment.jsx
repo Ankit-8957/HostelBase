@@ -12,20 +12,22 @@ const Payments = () => {
     "July","August","September","October","November","December"
   ];
 
-  // Fetch existing payments from backend
+  // ✅ Reusable fetch function
+  const fetchPayments = async () => {
+    try {
+      const res = await api.get("/payments");
+      setPayments(res.data);
+    } catch (err) {
+      console.error("Fetch payments failed:", err);
+    }
+  };
+
+  // Initial load
   useEffect(() => {
-    const fetchPayments = async () => {
-      try {
-        const res = await api.get("/payments");
-        setPayments(res.data);
-      } catch (err) {
-        console.error("Fetch payments failed:", err);
-      }
-    };
     fetchPayments();
   }, []);
 
-  // Merge months + payments
+  // Merge months with payment data
   const mergedPayments = months.map((month) => {
     const found = payments.find((p) => p.month === month);
     return found || { month, amount: 2000, status: "pending", _id: null };
@@ -36,7 +38,7 @@ const Payments = () => {
     try {
       setLoadingId(entry.month);
 
-      // 1️⃣ Create order on backend
+      // 1️⃣ Create order
       const { data } = await api.post("/create-order", {
         amount: entry.amount,
         month: entry.month,
@@ -50,9 +52,16 @@ const Payments = () => {
         name: "HostelBase",
         order_id: data.orderId,
 
+        method: {
+          upi: true,
+          card: true,
+          netbanking: true,
+          wallet: true
+        },
+
         handler: async function (response) {
           try {
-            // 3️⃣ Verify payment on backend
+            // 3️⃣ Verify payment
             await api.post("/verify-payment", {
               ...response,
               month: entry.month,
@@ -60,11 +69,18 @@ const Payments = () => {
 
             alert(`${entry.month} Payment Successful ✅`);
 
-            // Update UI
-            setPayments((prev) => [
-              ...prev,
-              { month: entry.month, amount: entry.amount, status: "paid" },
-            ]);
+            // ⚡ Optimistic update (instant UI)
+            setPayments((prev) =>
+              prev.map((p) =>
+                p.month === entry.month
+                  ? { ...p, status: "paid", paidAt: new Date() }
+                  : p
+              )
+            );
+
+            // 🔥 Sync with backend (real data)
+            await fetchPayments();
+
           } catch (err) {
             console.error("Payment verification failed:", err);
             alert("Payment verification failed ❌");
