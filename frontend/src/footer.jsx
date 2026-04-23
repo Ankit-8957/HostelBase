@@ -1,4 +1,4 @@
-import "./css/Footer.css";
+import "./css/footer.css";
 import { Link } from "react-router-dom";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
