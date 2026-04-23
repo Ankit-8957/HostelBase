@@ -21,7 +21,7 @@ import nodemailer from "nodemailer";
 
 // Middlewares
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: "https://hostel-base.vercel.app/",
   credentials: true
 }));
 // app.use(bodyParser.json());
