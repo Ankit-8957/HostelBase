@@ -46,7 +46,7 @@ app.use(express.static(path.join(__dirname, "../frontend/dist")));
 app.set("trust proxy", 1);
 
 const sessionOptions = {
-  secret: "bfabrgbagavn",
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {

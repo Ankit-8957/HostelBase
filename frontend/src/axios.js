@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: "https://hostelbase-backend.onrender.com",
   withCredentials: true, // 🔥 ALWAYS send cookies
 });
 api.interceptors.response.use(
