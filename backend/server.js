@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 const app = express();
+app.set("trust proxy", 1);
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -21,8 +22,9 @@ import Razorpay from "razorpay";
 import nodemailer from "nodemailer";
 
 // Middlewares
+
 app.use(cors({
-  origin: "https://hostel-base.vercel.app",
+  origin: ["https://hostel-base.vercel.app", "https://hostelbase-2.onrender.com"],
   credentials: true
 }));
 // app.use(bodyParser.json());
@@ -44,7 +46,6 @@ connectDB();
 
 // Serve React build folder
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
-app.set("trust proxy", 1);
 
 const store = MongoStore.create({
   mongoUrl: process.env.MONGO_URL,
@@ -62,8 +63,8 @@ const sessionOptions = {
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: process.env.NODE_ENV === "production",  
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",  
+    secure: true,  
+    sameSite: "lax",  
     httpOnly: true,
     maxAge: 7 * 24 * 60 * 60 * 1000
   }
