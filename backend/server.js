@@ -10,6 +10,7 @@ import mongoose from "mongoose";
 import Student from "./models/students.js";
 import Owner from "./models/owner.js";
 import session from "express-session";
+import MongoStore from "connect-mongo";
 import passport from "passport";
 import bcrypt from "bcrypt";
 import { Strategy as LocalStrategy } from "passport-local";
@@ -21,7 +22,7 @@ import nodemailer from "nodemailer";
 
 // Middlewares
 app.use(cors({
-  origin: "https://hostel-base.vercel.app/",
+  origin: "http://localhost:5173",
   credentials: true
 }));
 // app.use(bodyParser.json());
@@ -45,7 +46,18 @@ connectDB();
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
 app.set("trust proxy", 1);
 
+const store = MongoStore.create({
+  mongoUrl: process.env.MONGO_URL,
+  crypto: {
+    secret: process.env.SESSION_SECRET
+  },
+  touchAfter: 24 * 3600 // 24 hours
+});
+store.on("error", (err) => {
+  console.error("Session Store Error:", err);
+});
 const sessionOptions = {
+  store: store,
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
@@ -57,6 +69,8 @@ const sessionOptions = {
     maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
   }
 };
+
+
 app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
