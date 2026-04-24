@@ -21,14 +21,10 @@ import Razorpay from "razorpay";
 import nodemailer from "nodemailer";
 
 // Middlewares
-const corsOptions = {
+app.use(cors({
   origin: "https://hostel-base.vercel.app",
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-};
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions)); // Handle preflight for ALL routes
+  credentials: true
+}));
 // app.use(bodyParser.json());
 app.use(express.json());
 // Fix for __dirname in ES modules
@@ -60,15 +56,15 @@ const store = MongoStore.create({
 store.on("error", (err) => {
   console.error("Session Store Error:", err);
 });
-const isProduction = process.env.NODE_ENV === "production";
 const sessionOptions = {
   store: store,
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: isProduction,           // true on Render (HTTPS), false on localhost
-    sameSite: isProduction ? "none" : "lax", // "none" required for cross-origin cookies
+    // secure: process.env.NODE_ENV === "production",
+    secure: false,        // MUST be false on localhost
+    sameSite: "lax",
     httpOnly: true,
     maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
   }
