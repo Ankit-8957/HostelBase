@@ -24,7 +24,7 @@ const Students = () => {
     // Fetch students
     const fetchStudents = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/getStudents");
+        const res = await api.get("/getStudents");
         setStudents(res.data);
       } catch (err) {
         console.log("Student fetch error:", err);
