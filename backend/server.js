@@ -62,11 +62,10 @@ const sessionOptions = {
   resave: false,
   saveUninitialized: false,
   cookie: {
-    // secure: process.env.NODE_ENV === "production",
-    secure: false,        // MUST be false on localhost
-    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",  
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",  
     httpOnly: true,
-    maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+    maxAge: 7 * 24 * 60 * 60 * 1000
   }
 };
 
@@ -147,9 +146,9 @@ passport.use("owner-local",
     }
   })
 );
-app.use("/",authRoute);
-app.use("/",ownerRoute);
-app.use("/",studentRoute);
+app.use("/", authRoute);
+app.use("/", ownerRoute);
+app.use("/", studentRoute);
 
 // Start server
 app.listen(8080, () => {
