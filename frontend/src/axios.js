@@ -1,23 +1,19 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://hostelbase-2.onrender.com/",
-  withCredentials: true, // 🔥 ALWAYS send cookies
+  baseURL: "/api",       // ← requests go through Vercel proxy
+  withCredentials: true, // ← cookies work now (same domain)
 });
+
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-
-    if (error.response && error.response.status === 401) {
+    if (error.response?.status === 401) {
       console.log("🚨 401 detected");
-      console.log("URL:", error.response.config.url);
-      console.log("Method:", error.response.config.method);
-      console.log("Response Data:", error.response.data);
-      console.log("Headers:", error.response.headers);
-      // window.location.href = "/";
+      window.location.href = "/";
     }
-
     return Promise.reject(error);
   }
 );
+
 export default api;
