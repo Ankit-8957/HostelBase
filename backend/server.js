@@ -21,10 +21,14 @@ import Razorpay from "razorpay";
 import nodemailer from "nodemailer";
 
 // Middlewares
-app.use(cors({
+const corsOptions = {
   origin: "https://hostel-base.vercel.app",
-  credentials: true
-}));
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions)); // Handle preflight for ALL routes
 // app.use(bodyParser.json());
 app.use(express.json());
 // Fix for __dirname in ES modules
