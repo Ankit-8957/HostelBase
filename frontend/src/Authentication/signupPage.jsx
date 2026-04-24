@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../css/login.css";
+import api from "../axios.js"
 
 const SignupPage = ({ user }) => {
     const navigate = useNavigate();
@@ -36,7 +37,7 @@ const SignupPage = ({ user }) => {
 
         try {
             if (user === "Owner") {
-                const res = await axios.post("http://localhost:8080/owner/signup", {
+                const res = await api.post("/owner/signup", {
                     ownerName: formData.ownerName,
                     hostelName: formData.hostelName,
                     phone: formData.phone,
@@ -55,7 +56,7 @@ const SignupPage = ({ user }) => {
             }
 
             if (user === "Student") {
-                const res = await axios.post("http://localhost:8080/student/signup", {
+                const res = await api.post("/student/signup", {
                     name: formData.name,
                     email: formData.email,
                     password: formData.password,
