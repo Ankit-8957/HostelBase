@@ -56,15 +56,15 @@ const store = MongoStore.create({
 store.on("error", (err) => {
   console.error("Session Store Error:", err);
 });
+const isProduction = process.env.NODE_ENV === "production";
 const sessionOptions = {
   store: store,
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {
-    // secure: process.env.NODE_ENV === "production",
-    secure: false,        // MUST be false on localhost
-    sameSite: "lax",
+    secure: isProduction,           // true on Render (HTTPS), false on localhost
+    sameSite: isProduction ? "none" : "lax", // "none" required for cross-origin cookies
     httpOnly: true,
     maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
   }
