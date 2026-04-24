@@ -22,7 +22,7 @@ import nodemailer from "nodemailer";
 
 // Middlewares
 app.use(cors({
-  origin: "https://hostel-base.vercel.app/",
+  origin: "https://hostel-base.vercel.app",
   credentials: true
 }));
 // app.use(bodyParser.json());
